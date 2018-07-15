@@ -37,7 +37,7 @@ class Search extends Component {
         return (
             <form className="repo-search" onSubmit={this.handleSubmit}>
                 <label htmlFor="user_repo">Поиск issues</label>
-                <input type="text" id="user_repo" name="user_repo" placeholder="username/repository" defaultValue={this.state.searchInput} onChange={this.handleChange} pattern="[0-9A-Za-z_ ]+\/[0-9A-Za-z_ ]+" required />
+                <input type="text" id="user_repo" name="user_repo" placeholder="username/repository" defaultValue={this.state.searchInput} onChange={this.handleChange} pattern="[0-9A-Za-z_- ]+\/[0-9A-Za-z_- ]+" required />
                 <button type="submit">Найти</button>
             </form>
         )
