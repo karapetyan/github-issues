@@ -1,0 +1,48 @@
+.container {
+    padding-top: 30px;
+    text-align: center;
+}
+
+.middle-item {
+    position: relative;
+}
+
+.issues-list {
+    margin: 0 auto;
+}
+
+.issues-list td,
+.issues-list th {
+    padding: 0 20px 0 20px;
+}
+
+
+.error-icon::before {
+    position: absolute;
+    content: '';
+    width: 25px;
+    height: 25px;
+    background: url('./img/error.svg');
+    margin-top: -5px;
+    margin-left: -35px;
+}
+
+.spinner-icon::before {
+    position: absolute;
+    content: '';
+    width: 25px;
+    height: 25px;
+    background: url('./img/loader.svg');
+    margin-top: -5px;
+    margin-left: -35px;
+    animation-name: rotate-loader;
+    animation-duration: 3s;
+    animation-iteration-count: infinite;
+}
+
+
+@keyframes rotate-loader {
+    100% {
+        transform: rotate(360deg);
+    }
+}

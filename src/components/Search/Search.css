@@ -1,0 +1,21 @@
+.repo-search {
+    width: 500px;
+}
+
+.repo-search label {
+    display: block;
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+#user_repo {
+    width: 200px;
+    height: 30px;
+    font-size: 18px;
+}
+
+.repo-search button[type="submit"] {
+    width: 100px;  
+    height: 35px;
+    font-size: 18px;
+}
