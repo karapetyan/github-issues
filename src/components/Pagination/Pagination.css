@@ -1,0 +1,14 @@
+.pagination {
+    padding-top: 20px;
+}
+
+.pagination button {
+    cursor: pointer;
+    font-size: 18px;
+}
+
+.pagination .current {
+    font-size: 18px;
+    display: inline-block;
+    margin: 0 10px;
+}

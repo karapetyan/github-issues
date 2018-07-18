@@ -1,7 +1,14 @@
 let initialState = {
     issuesList: [],
     error: '',
-    isFetching: false
+    isFetching: false,
+    pages: {
+        pagination: {},
+        issuesPerPage: 30,
+        currentPage: 1,
+        owner: undefined,
+        repo: undefined
+    }
 }
 
 const issues = (state = initialState, action) => {
@@ -10,6 +17,13 @@ const issues = (state = initialState, action) => {
             return({
                 ...state,  
                 issuesList: [],
+                pages: {
+                    ...state.pages,
+                    pagination: {},
+                    owner: undefined,
+                    repo: undefined,
+                    currentPage: 1
+                },
                 error: action.error,
                 isFetching: false
             })
@@ -17,6 +31,13 @@ const issues = (state = initialState, action) => {
             return({
                 ...state,
                 issuesList: action.issues,
+                pages: {
+                    ...state.pages,
+                    pagination: action.pagination,
+                    owner: action.owner,
+                    repo: action.repo,
+                    currentPage: action.currentPage
+                },
                 isFetching: false,
                 error: ''
             })

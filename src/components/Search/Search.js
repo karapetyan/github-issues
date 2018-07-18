@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './Search.css';
-import fetchIssues from '../../utils/fetchIssues';
+
 
 class Search extends Component {
 
@@ -22,22 +22,14 @@ class Search extends Component {
     async handleSubmit(e) {
         e.preventDefault();
         let input = this.state.searchInput.split('/');
-        this.props.fetchStarted();
-        let issues = await fetchIssues(input[0], input[1])
-            .catch(error => {
-                this.props.addError(error);
-            });
-
-        if (issues) {
-            this.props.saveIssues(issues);
-        }
+        this.props.getIssues(input[0], input[1]);
     }
 
     render() {
         return (
-            <form className="repo-search" onSubmit={this.handleSubmit}>
-                <label htmlFor="user_repo">Поиск issues</label>
-                <input type="text" id="user_repo" name="user_repo" placeholder="username/repository" defaultValue={this.state.searchInput} onChange={this.handleChange} pattern="[0-9A-Za-z_- ]+\/[0-9A-Za-z_- ]+" required />
+            <form onSubmit={this.handleSubmit}>
+                <label className="search-label" htmlFor="user_repo">Поиск issues</label>
+                <input type="text" id="user_repo" name="user_repo" placeholder="username/repository" defaultValue={this.state.searchInput} onChange={this.handleChange} pattern="[0-9A-Za-z_\- ]+\/[0-9A-Za-z_\- ]+" required />
                 <button type="submit">Найти</button>
             </form>
         )

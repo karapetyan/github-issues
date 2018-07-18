@@ -1,20 +1,26 @@
+import parseLinkHeader from 'parse-link-header';
+
 const GIT_URL = "https://api.github.com";
 
 let myHeaders = new Headers();
 myHeaders.append("Accept", "application/vnd.github.v3+json");
 
-function fetchIssues(owner, repo) {
-    return fetch(`${GIT_URL}/repos/${owner}/${repo}/issues`, {
+function fetchIssues(owner, repo, currentPage, issuesPerPage) {
+    return fetch(`${GIT_URL}/repos/${owner}/${repo}/issues?page=${currentPage}&per_page=${issuesPerPage}`, {
         method: "GET",
         headers: myHeaders
     })
     .then(response => {
         if (response.status !== 200) throw ('Возникла ошибка. Код ошибки: ' + response.status);
-        return response.json();
+        return response.json()
+            .then(json => ({
+                json,
+                pagination: parseLinkHeader(response.headers.get('Link'))
+            }))
     })
-    .then(json => { 
+    .then(data => { 
         let issues = [];
-        json.forEach(issue => {
+        data.json.forEach(issue => {
             issues.push({
                 number: issue.number,
                 created_at: issue.created_at,
@@ -22,7 +28,13 @@ function fetchIssues(owner, repo) {
                 url: issue.html_url
             })
         });
-        return issues
+        return ({
+            issues,
+            pagination: data.pagination,
+            owner,
+            repo,
+            currentPage
+        }) 
     })
     .catch(e => {
         throw (e);
