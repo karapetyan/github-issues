@@ -6,14 +6,15 @@ const addError = (error) =>
         error
     })
 
-const saveIssues = (issues, pagination, owner, repo, currentPage) =>
+const saveIssues = (issues, pagination, owner, repo, currentPage, issuesPerPage) =>
     ({
         type: 'SAVE_ISSUES',
         issues,
         pagination,
         owner,
         repo,
-        currentPage
+        currentPage,
+        issuesPerPage
     })
 
 const fetchStarted = () =>
@@ -32,12 +33,11 @@ const loadIssues = (owner, repo, page, issuesPerPage) => {
                 dispatch(addError(error));
             });
         if (data) {
-           dispatch(saveIssues(data.issues, data.pagination, data.owner, data.repo, data.currentPage));
+           dispatch(saveIssues(data.issues, data.pagination, data.owner, data.repo, data.currentPage, data.issuesPerPage));
         }
     }
 }
     
-
 export const getIssues = (owner, repo) => 
     (dispatch, getState) => {
         let page = 1;
@@ -53,7 +53,10 @@ export const changePage = page =>
     }
 
 
-export const changeIssuesPerPage = issuesPerPage => {
-    /***/
+export const setIssuesPerPage = newIssuesPerPage => 
+    (dispatch, getState) => {
+        let { owner, repo, currentPage, issuesPerPage } = { ...getState().issues.pages };
+        if (issuesPerPage !== newIssuesPerPage) currentPage = Math.ceil((currentPage * issuesPerPage - issuesPerPage + 1) / newIssuesPerPage);
+        dispatch(loadIssues(owner, repo, currentPage, newIssuesPerPage));
 }
     

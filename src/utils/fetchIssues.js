@@ -15,7 +15,7 @@ function fetchIssues(owner, repo, currentPage, issuesPerPage) {
         return response.json()
             .then(json => ({
                 json,
-                pagination: parseLinkHeader(response.headers.get('Link'))
+                pagination: parseLinkHeader(response.headers.get('Link')) ? parseLinkHeader(response.headers.get('Link')) : {}
             }))
     })
     .then(data => { 
@@ -33,7 +33,8 @@ function fetchIssues(owner, repo, currentPage, issuesPerPage) {
             pagination: data.pagination,
             owner,
             repo,
-            currentPage
+            currentPage,
+            issuesPerPage
         }) 
     })
     .catch(e => {

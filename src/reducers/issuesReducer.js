@@ -4,10 +4,10 @@ let initialState = {
     isFetching: false,
     pages: {
         pagination: {},
-        issuesPerPage: 30,
-        currentPage: 1,
         owner: undefined,
-        repo: undefined
+        repo: undefined,
+        currentPage: 1,
+        issuesPerPage: 30
     }
 }
 
@@ -36,7 +36,8 @@ const issues = (state = initialState, action) => {
                     pagination: action.pagination,
                     owner: action.owner,
                     repo: action.repo,
-                    currentPage: action.currentPage
+                    currentPage: action.currentPage,
+                    issuesPerPage: action.issuesPerPage
                 },
                 isFetching: false,
                 error: ''
