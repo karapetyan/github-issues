@@ -1,0 +1,29 @@
+.autocomplete-list {
+    position: absolute;
+    background: #fff;
+    list-style: none;
+    left: -40px;
+    top: 20px;
+    z-index: 1;
+    text-align: left;
+}
+
+.autocomplete-list li {
+    width: 195px;
+    height: 40px;
+    line-height: 40px;
+    border-width: 1px 1px 0 1px;
+    border-style: solid;
+    border-color: gray;
+    padding: 0 5px;
+    overflow: hidden;
+}
+
+.autocomplete-list li:last-child {
+    border-bottom-width: 1px;
+}
+
+.autocomplete-list li:hover {
+    background: rgba(63, 63, 224, 0.808);
+    color: #fff;
+}

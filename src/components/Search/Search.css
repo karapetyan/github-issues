@@ -15,3 +15,8 @@ button[type="submit"] {
     height: 35px;
     font-size: 18px;
 }
+
+.autocomplete-container {
+    position: relative;
+    display: inline-block;
+}
